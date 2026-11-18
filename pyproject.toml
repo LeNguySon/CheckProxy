@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proxy-checker"
+version = "0.1.0"
+description = "Async SDK and CLI for checking user-provided proxies"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Proxy Checker contributors" }]
+license-files = ["LICENSE-ECC"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.6", "mypy>=1.10"]
+
+[project.scripts]
+proxy-checker = "proxy_checker.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["proxy_checker*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = [".github"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["proxy_checker"]
+exclude = ["build/", "dist/", ".*\\.egg-info/"]
